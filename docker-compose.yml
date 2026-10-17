@@ -1,0 +1,26 @@
+services:
+  android:
+    image: redroid/redroid:13.0.0-latest
+    privileged: true            # Redroid needs this (binder kernel support)
+    restart: unless-stopped
+    command:
+      - androidboot.redroid_width=720
+      - androidboot.redroid_height=1280
+      - androidboot.redroid_dpi=320
+      - androidboot.redroid_gpu_mode=guest
+    volumes:
+      - android-data:/data
+    # port 5555 is NOT published: only the app container can reach ADB
+
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on: [android]
+    environment:
+      ADB_HOST: android:5555
+      ACCESS_TOKEN: ${ACCESS_TOKEN:-change-me}
+    ports:
+      - "3000:3000"
+
+volumes:
+  android-data:
