@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloud APK Runner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="mark" aria-hidden="true"></span>Cloud APK Runner</div>
+  <div class="conn">
+    <span id="pill" class="pill off" role="status">Offline</span>
+    <input id="token" type="password" placeholder="Access token" autocomplete="off" aria-label="Access token">
+    <button id="connect" class="btn primary">Connect</button>
+  </div>
+</header>
+
+<main class="grid">
+  <aside class="col">
+    <section class="card">
+      <h2>Install an APK</h2>
+      <label id="drop" class="drop" tabindex="0">
+        <input id="apk" type="file" accept=".apk" hidden>
+        <strong>Drop an APK here</strong>
+        <span>or click to choose a file (max 300 MB)</span>
+      </label>
+      <div id="bar" class="bar" hidden><i></i></div>
+      <p id="msg" class="msg" role="status"></p>
+    </section>
+
+    <section class="card">
+      <div class="row"><h2>Installed apps</h2><button id="refresh" class="btn ghost sm">Refresh</button></div>
+      <ul id="apps" class="apps"><li class="empty">Connect to see your apps.</li></ul>
+    </section>
+  </aside>
+
+  <section class="stage" aria-label="Android screen">
+    <div class="device">
+      <div class="frame">
+        <img id="screen" alt="Android screen" draggable="false" tabindex="0" hidden>
+        <div id="state" class="state">Not connected.<br>Enter your token and press Connect.</div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn ghost" data-key="BACK">Back</button>
+      <button class="btn ghost" data-key="HOME">Home</button>
+      <button class="btn ghost" data-key="APP_SWITCH">Recent apps</button>
+    </div>
+    <p class="hint">Click to tap, drag to swipe. Click the screen, then type to send keys.</p>
+  </section>
+
+  <aside class="col">
+    <section class="card">
+      <h2>Controls</h2>
+      <div class="send">
+        <input id="text" type="text" maxlength="100" placeholder="Type text to send" aria-label="Text to send">
+        <button id="sendText" class="btn primary">Send</button>
+      </div>
+      <button id="shot" class="btn ghost wide">Save screenshot</button>
+      <dl class="stats">
+        <div><dt>Frame rate</dt><dd id="fps">-</dd></div>
+        <div><dt>Tap to screen</dt><dd id="lat">-</dd></div>
+        <div><dt>Screen size</dt><dd id="size">-</dd></div>
+      </dl>
+    </section>
+
+    <section class="card">
+      <div class="row"><h2>Activity</h2><button id="clear" class="btn ghost sm">Clear</button></div>
+      <ol id="log" class="log"><li>Nothing yet.</li></ol>
+    </section>
+  </aside>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
